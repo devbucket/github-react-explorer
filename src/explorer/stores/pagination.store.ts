@@ -23,8 +23,8 @@ export type PaginationStore = {
   cursors: Cursors;
   setCursors: (page: number, cursor: string | null) => void;
   resetCursors: () => void;
-  pageInfo: PageInfo | null;
-  setPageInfo: (pageInfo: PageInfo | null) => void;
+  pageInfo: Omit<PageInfo, '__typename'> | null;
+  setPageInfo: (pageInfo: Omit<PageInfo, '__typename'> | null) => void;
   rowsPerPage: number;
   setRowsPerPage: (rowsPerPage: number) => void;
   total: number;

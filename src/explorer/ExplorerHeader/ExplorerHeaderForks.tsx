@@ -43,6 +43,7 @@ export function ExplorerHeaderForks() {
         active={orderBy === OrderBy.FORKS}
         direction={orderBy === OrderBy.FORKS && order ? order : Order.DESC}
         onClick={handleSort}
+        data-testid="forks-header-sort-label"
       >
         <ExplorerForksIcon />
         <span>Forks</span>

@@ -10,7 +10,7 @@ import { useLoadRepositories } from './hooks/useLoadRepositories';
  * Renders a table of repositories related to "React".
  */
 export function Explorer() {
-  const { loading } = useLoadRepositories();
+  const { loading, hasError } = useLoadRepositories();
 
   return (
     <Paper sx={{ width: 768, mx: 'auto' }} elevation={8}>
@@ -18,7 +18,7 @@ export function Explorer() {
       <TableContainer>
         <Table sx={{ tableLayout: 'fixed' }}>
           <ExplorerHeader />
-          <ExplorerBody loading={loading} />
+          <ExplorerBody loading={loading} hasError={hasError} />
         </Table>
       </TableContainer>
       <ExplorerPagination />

@@ -43,6 +43,7 @@ export function ExplorerHeaderStars() {
         active={orderBy === OrderBy.STARS}
         direction={orderBy === OrderBy.STARS && order ? order : Order.DESC}
         onClick={handleSort}
+        data-testid="stars-header-sort-label"
       >
         <ExplorerStarsIcon />
         <span>Stars</span>

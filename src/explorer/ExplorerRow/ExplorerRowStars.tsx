@@ -14,7 +14,7 @@ export function ExplorerRowStars() {
   return (
     <Stack direction="row">
       <ExplorerStarsIcon />
-      <span>{repository.stars.toLocaleString()}</span>
+      <span role="columnheader">{repository.stars.toLocaleString()}</span>
     </Stack>
   );
 }
