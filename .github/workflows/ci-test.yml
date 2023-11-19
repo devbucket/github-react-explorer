@@ -1,0 +1,57 @@
+name: Tests
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+      - converted_to_draft
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.ref_name }}-linting"
+  cancel-in-progress: true
+
+jobs:
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.18.0
+          cache: pnpm
+
+      - name: Handle vitest cache
+        id: vitest-cache
+        uses: actions/cache@v3
+        env:
+          cache-name: vitest
+          cache-fingerprint: ${{ hashFiles('**/node_mdoules/.cache/.vitest') }}
+        with:
+          path: "**/node_mdoules/.cache/.vitest"
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Unit Tests
+        run: pnpm run test --coverage
+
+      - name: coverage report
+        uses: romeovs/lcov-reporter-action@2a28ec3e25fb7eae9cb537e9141603486f810d1a
+        # The reason for using a hash rather than a version/tag, is the project
+        # failed in publishing this release: https://github.com/romeovs/lcov-reporter-action/issues/47
+        with:
+          github-token: ${{ steps.get_token.outputs.token }}
+          lcov-file: "./coverage/lcov.info"
+          filter-changed-files: true
+          delete-old-comments: true

@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint:run": "eslint . --ext ts,tsx,graphql --report-unused-disable-directives",
+    "lint:eslint": "eslint . --ext ts,tsx,graphql --report-unused-disable-directives",
     "lint:ts": "tsc -p . --noEmit --skipLibCheck",
-    "lint": "pnpm run lint:run --fix && pnpm run lint:ts",
+    "lint": "pnpm run lint:eslint --fix && pnpm run lint:ts",
     "test": "vitest run --coverage",
     "test:ui": "vitest --ui --coverage",
     "schema": "graphql-codegen && pnpm run lint:run --fix"
