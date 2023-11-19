@@ -27,6 +27,7 @@ export function useLoadRepositories() {
 
   const after = cursors[page] ?? null;
 
+  // Build the query string
   const query = ['is:public', 'react', searchString, `sort:${orderBy}-${order}`]
     .filter(Boolean)
     .join(' ')

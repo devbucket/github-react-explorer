@@ -1,9 +1,13 @@
 import { TablePagination } from '@mui/material';
+
 import { usePaginationStore } from './stores/pagination.store';
 
 const { setPage, setCursors, resetCursors, setRowsPerPage } =
   usePaginationStore.getState();
 
+/**
+ * Renders the table pagination.
+ */
 export function ExplorerPagination() {
   const { total, page, pageInfo, rowsPerPage } = usePaginationStore(
     (state) => ({
@@ -29,16 +33,17 @@ export function ExplorerPagination() {
    * Handle page change.
    */
   const handlePageChange = (_: unknown, newPage: number) => {
+    // Set the new page.
     setPage(newPage);
 
+    // If we are on the first page, reset cursors.
     if (newPage === 1) {
       resetCursors();
       return;
     }
 
-    if (newPage > page) {
-      setCursors(newPage, pageInfo?.endCursor || null);
-    }
+    // Store the cursors for the next page.
+    setCursors(newPage, pageInfo?.endCursor || null);
   };
 
   return (

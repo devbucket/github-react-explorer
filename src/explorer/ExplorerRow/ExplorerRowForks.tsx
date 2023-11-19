@@ -14,7 +14,7 @@ export function ExplorerRowForks() {
   return (
     <Stack direction="row">
       <ExplorerForksIcon />
-      <span>{repository.forks.toLocaleString()}</span>
+      <span role="columnheader">{repository.forks.toLocaleString()}</span>
     </Stack>
   );
 }

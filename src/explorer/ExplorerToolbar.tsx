@@ -15,7 +15,7 @@ export function ExplorerToolbar() {
   const [value, setValue] = useState('');
   const searchString = useRepositoriesStore((state) => state.searchString);
 
-  // Syncs the search input with the search string.
+  // Syncs the search input with the search string, when the search string changes.
   useEffect(() => {
     setValue(searchString);
   }, [searchString]);

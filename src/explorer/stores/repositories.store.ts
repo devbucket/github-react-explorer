@@ -24,10 +24,17 @@ export type ParsedRepository = {
   url: string;
 };
 
+/**
+ * Ordering direction.
+ */
 export enum Order {
   ASC = 'asc',
   DESC = 'desc',
 }
+
+/**
+ * Ordering field.
+ */
 export enum OrderBy {
   STARS = 'stars',
   FORKS = 'forks',

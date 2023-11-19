@@ -12,7 +12,11 @@ export function ExplorerRowTitle() {
 
   return (
     <>
-      <Typography variant="body1" fontWeight="500">
+      <Typography
+        variant="body1"
+        fontWeight="500"
+        data-testid="explorer-row-title"
+      >
         <Link href={repository.url} target="_blank">
           {repository.name}
         </Link>
@@ -23,6 +27,7 @@ export function ExplorerRowTitle() {
           variant="caption"
           color="textSecondary"
           noWrap
+          data-testid="explorer-row-description"
         >
           {repository.description}
         </Typography>
