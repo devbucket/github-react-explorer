@@ -2,7 +2,7 @@ import { TablePagination } from '@mui/material';
 
 import { usePaginationStore } from './stores/pagination.store';
 
-const { setPage, setCursors, resetCursors, setRowsPerPage } =
+const { setPage, resetCursors, setRowsPerPage, setAfter, setBefore } =
   usePaginationStore.getState();
 
 /**
@@ -42,8 +42,14 @@ export function ExplorerPagination() {
       return;
     }
 
-    // Store the cursors for the next page.
-    setCursors(newPage, pageInfo?.endCursor || null);
+    if (newPage < page) {
+      setBefore(pageInfo?.startCursor || null);
+      setAfter(null);
+      return;
+    }
+
+    setAfter(pageInfo?.endCursor || null);
+    setBefore(null);
   };
 
   return (

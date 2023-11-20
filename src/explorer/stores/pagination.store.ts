@@ -20,8 +20,10 @@ export type Cursors = {
 export type PaginationStore = {
   page: number;
   setPage: (page: number) => void;
-  cursors: Cursors;
-  setCursors: (page: number, cursor: string | null) => void;
+  after: string | null;
+  setAfter: (after: string | null) => void;
+  before: string | null;
+  setBefore: (before: string | null) => void;
   resetCursors: () => void;
   pageInfo: Omit<PageInfo, '__typename'> | null;
   setPageInfo: (pageInfo: Omit<PageInfo, '__typename'> | null) => void;
@@ -37,18 +39,11 @@ export type PaginationStore = {
 export const usePaginationStore = create<PaginationStore>((set) => ({
   page: 1,
   setPage: (page) => set({ page }),
-  cursors: {},
-  setCursors: (page, cursor) => {
-    set((prevState) => ({
-      cursors: {
-        ...prevState.cursors,
-        [page]: cursor,
-      },
-    }));
-  },
-  resetCursors: () => {
-    set({ cursors: {} });
-  },
+  after: null,
+  setAfter: (after) => set({ after }),
+  before: null,
+  setBefore: (before) => set({ before }),
+  resetCursors: () => set({ after: null, before: null }),
   pageInfo: null,
   setPageInfo: (pageInfo) => set({ pageInfo }),
   rowsPerPage: 10,
