@@ -1,5 +1,6 @@
 {
   "name": "github-explorer",
+  "author": "Florian Müller <flomueller1981@gmai.com>",
   "private": true,
   "version": "0.0.0",
   "type": "module",
