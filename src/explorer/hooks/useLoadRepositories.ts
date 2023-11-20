@@ -19,13 +19,13 @@ export function useLoadRepositories() {
     order: state.order,
     orderBy: state.orderBy,
   }));
-  const { page, cursors, rowsPerPage } = usePaginationStore((state) => ({
-    page: state.page,
-    cursors: state.cursors,
+  const { after, before, rowsPerPage } = usePaginationStore((state) => ({
+    after: state.after,
+    before: state.before,
     rowsPerPage: state.rowsPerPage,
   }));
 
-  const after = cursors[page] ?? null;
+  // const after = cursors[page] ?? null;
 
   // Build the query string
   const query = ['is:public', 'react', searchString, `sort:${orderBy}-${order}`]
@@ -39,6 +39,7 @@ export function useLoadRepositories() {
       query: query,
       first: rowsPerPage,
       after: after,
+      before: before,
     },
     onCompleted(data) {
       const total = data.search.repositoryCount;
