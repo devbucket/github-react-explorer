@@ -1,8 +1,10 @@
 name: Linting
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+  pull_request:
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.ref_name }}-linting"
