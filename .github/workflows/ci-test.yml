@@ -50,3 +50,7 @@ jobs:
 
       - name: Unit Tests
         run: pnpm run test
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2.2.3
+
