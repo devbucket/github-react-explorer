@@ -6,7 +6,8 @@ describe('usePaginationStore', () => {
     const { result } = renderHook(() => usePaginationStore());
 
     expect(result.current.page).toBe(1);
-    expect(result.current.cursors).toEqual({});
+    expect(result.current.after).toBe(null);
+    expect(result.current.before).toBe(null);
     expect(result.current.pageInfo).toBe(null);
     expect(result.current.rowsPerPage).toBe(10);
     expect(result.current.total).toBe(0);
@@ -27,23 +28,38 @@ describe('usePaginationStore', () => {
   it('should set and reset cursors', async () => {
     const { result } = renderHook(() => usePaginationStore());
 
-    expect(result.current.cursors).toEqual({});
+    expect(result.current.after).toBe(null);
+    expect(result.current.before).toBe(null);
 
     await waitFor(() => {
-      result.current.setCursors(2, 'cursor');
+      result.current.setAfter('cursor');
+      result.current.setBefore(null);
     });
 
-    expect(result.current.cursors).toEqual(
-      expect.objectContaining({
-        2: 'cursor',
-      }),
-    );
+    expect(result.current.after).toBe('cursor');
+    expect(result.current.before).toBe(null);
 
     await waitFor(() => {
       result.current.resetCursors();
     });
 
-    expect(result.current.cursors).toEqual({});
+    expect(result.current.after).toBe(null);
+    expect(result.current.before).toBe(null);
+
+    await waitFor(() => {
+      result.current.setAfter(null);
+      result.current.setBefore('cursor');
+    });
+
+    expect(result.current.after).toBe(null);
+    expect(result.current.before).toBe('cursor');
+
+    await waitFor(() => {
+      result.current.resetCursors();
+    });
+
+    expect(result.current.after).toBe(null);
+    expect(result.current.before).toBe(null);
   });
 
   it('should set the page info', async () => {
