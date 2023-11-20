@@ -1,6 +1,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/devbucket/github-react-explorer/badge.svg?branch=main)](https://coveralls.io/github/devbucket/github-react-explorer?branch=main)
+![GitHub deployments](https://img.shields.io/github/deployments/devbucket/github-react-explorer/production?logo=vercel&logoColor=white&label=vercel)
+
 
 # GitHub "React" Explorer
+
+App URL: https://github-react-explorer.vercel.app/
 
 **This application renders trending GitHub repositions in a table view.**
 
